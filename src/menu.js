@@ -1,29 +1,27 @@
-
-
-export const refs = {
+import Theme from './theme.json';
+const refs = {
     body: document.querySelector('body'),
     checkBoxTheme: document.querySelector('#theme-switch-toggle')
 }
 
+let isChecked = JSON.parse(localStorage.getItem('CHECKED'));  
 
-const Theme = {
-    LIGHT: "light-theme",
-    DARK: "dark-theme",
-}
-
-const parseJsonTheme = JSON.stringify(Theme);
-localStorage.setItem('Theme', parseJsonTheme);
-
-
+firstTheme();
 refs.checkBoxTheme.addEventListener('change', changeTheme);
 
-function changeTheme(event) {
+function firstTheme() {
 
-    const isChecked = JSON.parse(localStorage.getItem('CHECKED'));
+    refs.body.setAttribute('class', !isChecked ? Theme.LIGHT : Theme.DARK)
 
-    refs.body.setAttribute('class', isChecked ? Theme.LIGHT : Theme.DARK)
+    if (isChecked) {
+        refs.checkBoxTheme.setAttribute('checked', true);
+    }
+    
+};
 
-    localStorage.setItem('CHECKED', !isChecked)
+function changeTheme() {
+    isChecked = JSON.parse(localStorage.getItem('CHECKED'));
+    refs.body.setAttribute('class', isChecked ? Theme.LIGHT : Theme.DARK);
 
-
-}
+    localStorage.setItem('CHECKED', !isChecked);
+};
