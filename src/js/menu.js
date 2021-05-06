@@ -1,4 +1,4 @@
-import Theme from './theme.json';
+import Theme from '../data/theme.json';
 const refs = {
     body: document.querySelector('body'),
     checkBoxTheme: document.querySelector('#theme-switch-toggle')
